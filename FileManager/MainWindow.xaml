@@ -1,12 +1,63 @@
-﻿<Window x:Class="FileManager.MainWindow"
+﻿<Controls:MetroWindow x:Class="FileManager.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:local="clr-namespace:FileManager"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
-</Window>
+        Title="Файловый обозреватель" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <Label Margin="10">Диск:</Label>
+            <ComboBox Margin="10" ItemsSource="{Binding Drives}" SelectedItem="{Binding SelectedDrive}"></ComboBox>
+            <Button Margin="5 10" Command="{Binding NewFolderCommand}" 
+                ToolTip="Создать новую папку" Height="25" Width="25" Padding="3">
+                <Image Source="/res/icons/dir_icon.png"/>
+            </Button>
+            <Button Margin="5 10" Command="{Binding DesktopCommand}" 
+                ToolTip="Открыть папку рабочего стола" Height="25" Width="25" Padding="3">
+                <Image Source="/res/icons/desktop.ico"/>
+            </Button>
+            <Button Margin="5 10" Command="{Binding MyDocumentsCommand}" 
+                ToolTip="Открыть папку Мои Документы" Height="25" Width="25" Padding="3">
+                <Image Source="/res/icons/documents.png"/>
+            </Button>
+            <Button Margin="5 10" Command="{Binding SystemCommand}" 
+                ToolTip="Открыть папку Системы" Height="25" Width="25" Padding="3">
+                <Image Source="/res/icons/system.png"/>
+            </Button>
+        </StackPanel>
+        <ListView x:Name="leftFilesList"
+                 ItemsSource="{Binding LeftFiles}"
+                 SelectedItem="{Binding LeftSelectedFile}">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Открыть" Command="{Binding OpenFileCommand}"/>
+                    <MenuItem Header="Переименовать" Command="{Binding RenameFileCommand}"/>
+                    <MenuItem Header="Удалить" Command="{Binding DeleteFileCommand}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Path=Icon}" Height="15" Width="15"></Image>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Width="300">Название</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Size}" Width="70">Размер</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Date}" Width="130">Дата изменения</GridViewColumn>
+                </GridView>
+            </ListView.View>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding OpenFileCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListView>
+    </DockPanel>
+</Controls:MetroWindow>

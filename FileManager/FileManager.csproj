@@ -35,8 +35,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,6 +64,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ConfirmWindow.xaml.cs">
+      <DependentUpon>ConfirmWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RootDirectory.cs" />
+    <Compile Include="Models\WindowsDirectory.cs" />
+    <Compile Include="Models\IWindowsFile.cs" />
+    <Compile Include="Models\WindowsFile.cs" />
+    <Compile Include="OperationWindow.xaml.cs">
+      <DependentUpon>OperationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rename.xaml.cs">
+      <DependentUpon>Rename.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\RelayCommand.cs" />
+    <Compile Include="ViewModels\MainVM.cs" />
+    <Page Include="ConfirmWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,6 +95,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="OperationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Rename.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -86,6 +122,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -93,6 +130,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\dir_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\unknown_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\root.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\desktop.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\documents.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\downloads.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="res\icons\system.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
